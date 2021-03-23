@@ -1,0 +1,10 @@
+.git
+.Xil
+*.cache
+*.hw
+*.ioplanning
+*.ip_user_files
+*.runs
+*.sim
+vivado*
+NixieClock.xpr
