@@ -24,7 +24,7 @@ module ClockStateStorage(
     // output of the current time formatted based on dip
     output [5:0] second, minute, hour
 );
-
+    // TODO: these could use more comments
     reg [26:0] secondIncrementCounter;
     
     reg [5:0] trueHour; 
@@ -60,15 +60,14 @@ module ClockStateStorage(
         if (down) begin
             case (cursorPos)
                 3'b001 : trueSecond = trueSecond > 0 ? trueSecond - 1 : 59;
-                3'b001 : trueMinute = trueMinute > 0 ? trueMinute - 1 : 59;
-                3'b001 : trueHour = trueHour > 0 ? trueHour - 1 : 23;
+                3'b010 : trueMinute = trueMinute > 0 ? trueMinute - 1 : 59;
+                3'b100 : trueHour = trueHour > 0 ? trueHour - 1 : 23;
                 
             endcase
         end
 
 
         // increment counter, if we reach 100M reset to zero, increment clock
-        // TODO: verify this works with testbench
         secondIncrementCounter <= secondIncrementCounter + 1;
         if (secondIncrementCounter == 27'd100000000) begin
             secondIncrementCounter <= 1;
