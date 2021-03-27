@@ -75,7 +75,7 @@ module ClockStateStorage(
                     trueMinute <= 0;
                     trueHour <= trueHour + 1;
                     // if hour is 24, "overflow" to zero (midnight)
-                    if (trueHour == 6'24) begin
+                    if (trueHour == 6'd24) begin
                         trueHour <= 0;
                     end
                 end
@@ -86,12 +86,14 @@ module ClockStateStorage(
     // turns 24 hour value into 12 hour representation for normal people
     function [5:0] hourAs12Representation;
         input [5:0] inHour;
-        if (inHour = 0)
-            hour12 = 6'd12;
-        else if (inHour > 0 & inHour <= 12)
-            hour12 = inHour;
-        else // if (inHour > 12)
-            hour12 = inHour - 6'd12;
+        begin
+            if (inHour == 0)
+                hourAs12Representation = 6'd12;
+            else if (inHour > 0 & inHour <= 12)
+                hourAs12Representation = inHour;
+            else // if (inHour > 12)
+                hourAs12Representation = inHour - 6'd12;
+        end
     endfunction
 
 endmodule

@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 // File: Testbench-ClockStateStorage.v
 // Author: BlackIsDevin (https://github.com/BlackIsDevin)
-// Creation Date: 3/27/2021‏‎
+// Creation Date: 3/27/2021�?‎
 // Target Devices: Mimas A7 Revision V3 Development Board 
 //
 // Description: This module is intended to test and verify the functionality of
@@ -25,7 +25,7 @@ module TestbenchClockStateStorage();
     wire [5:0] second, minute, hour;
 
     // Instantiation of our ClockStateStorage module
-    ClockStateStorage(clk, dip, up, down, reset, cursorPos, second, minute, hour);
+    ClockStateStorage css(clk, dip, up, down, reset, cursorPos, second, minute, hour);
 
     initial begin
         clk = 1;
