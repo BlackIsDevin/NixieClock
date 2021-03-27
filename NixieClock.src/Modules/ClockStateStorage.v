@@ -36,6 +36,13 @@ module ClockStateStorage(
     assign minute = trueMinute;
     assign second = trueSecond;
 
+    initial begin
+        trueSecond = 0;
+        trueMinute = 0;
+        trueHour = 0;
+        secondIncrementCounter = 0;
+    end
+
     always @(posedge clk) begin
         // handle input pulses, these do not overflow into each other
         if (reset) begin
