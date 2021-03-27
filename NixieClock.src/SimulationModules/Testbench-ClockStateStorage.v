@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 // File: Testbench-ClockStateStorage.v
 // Author: BlackIsDevin (https://github.com/BlackIsDevin)
-// Creation Date: 3/27/2021�?‎
+// Creation Date: 3/27/2021�?‎
 // Target Devices: Mimas A7 Revision V3 Development Board 
 //
 // Description: This module is intended to test and verify the functionality of
@@ -27,13 +27,75 @@ module TestbenchClockStateStorage();
     // Instantiation of our ClockStateStorage module
     ClockStateStorage css(clk, dip, up, down, reset, cursorPos, second, minute, hour);
 
+
+    integer i;
     initial begin
         clk = 1;
         dip = 1;
         up = 0;
         down = 0;
         reset = 0;
+        // testing to see if input signals work correctly
+
+        // testing seconds increment/decrement/overflow
         cursorPos = 3'b001;
+        #25 up = 1;
+        #10 up = 0;
+        
+        #30 down = 1;
+        #10 down = 0;
+
+        #30 down = 1;
+        #10 down = 0;
+
+        #30 up = 1;
+        #10 up = 0;
+
+        #30 up = 1;
+        #10 up = 0;
+
+        // testing minutes increment/decrement/overflow
+        #50 cursorPos = 3'b010;
+        #10 up = 1;
+        #10 up = 0;
+
+        #30 down = 1;
+        #10 down = 0;
+                
+        #30 down = 1;
+        #10 down = 0;
+
+        #30 up = 1;
+        #10 up = 0;
+
+        #30 up = 1;
+        #10 up = 0;
+
+        // testing hours increment/decrement/overflow
+        #50 cursorPos = 3'b100;
+        #10 up = 1;
+        #10 up = 0;
+
+        #30 down = 1;
+        #10 down = 0;
+
+        #30 down = 1;
+        #10 down = 0;
+
+        #30 up = 1;
+        #10 up = 0;
+
+        // testing 12 hour time
+        #50 dip = 0;
+        // increment through all hour possibilities
+        for (i = 0; i < 25; i = i + 1) begin
+            #30 up = 1;
+            #10 up = 0;
+        end
+
+        // testing reset
+        #50 reset = 1;
+        #10 reset = 0;
     end
 
     always begin
