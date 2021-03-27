@@ -71,18 +71,18 @@ module ClockStateStorage(
         // TODO: verify this works with testbench
         secondIncrementCounter <= secondIncrementCounter + 1;
         if (secondIncrementCounter == 27'd100000000) begin
-            secondIncrementCounter <= 0;
+            secondIncrementCounter <= 1;
             trueSecond <= trueSecond + 1;
             // if second is 60, "overflow" to minutes
-            if (trueSecond == 6'd60) begin
+            if (trueSecond == 6'd59) begin
                 trueSecond <= 0;
                 trueMinute <= trueMinute + 1;
                 // if minute is 60, "overflow" to hours
-                if (trueMinute == 6'd60) begin
+                if (trueMinute == 6'd59) begin
                     trueMinute <= 0;
                     trueHour <= trueHour + 1;
                     // if hour is 24, "overflow" to zero (midnight)
-                    if (trueHour == 6'd24) begin
+                    if (trueHour == 6'd23) begin
                         trueHour <= 0;
                     end
                 end
